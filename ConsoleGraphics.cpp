@@ -8,7 +8,7 @@
 #define print cout<<
 using namespace std;
 
-void window1(int height, int width, int x_pos, int y_pos)
+void window1(int height, int width, int x_pos, int y_pos)//parameters uses to set window size and position
 {
 	HWND wh = GetConsoleWindow();
 	MoveWindow(wh, x_pos, y_pos, width, height, TRUE);
@@ -17,21 +17,21 @@ void window1(int height, int width, int x_pos, int y_pos)
 	hInput = GetStdHandle(STD_INPUT_HANDLE);
 	GetConsoleMode(hInput, &prev_mode);
 	SetConsoleMode(hInput, prev_mode & ENABLE_EXTENDED_FLAGS);
-	ShowScrollBar(GetConsoleWindow(), SB_VERT, 0);
+	ShowScrollBar(GetConsoleWindow(), SB_VERT, 0);//hide scrollbar becouse scrolling broke picture
 	HDC hdc = GetDC(GetConsoleWindow());
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO info;
 	info.dwSize = 100;
-	info.bVisible = FALSE;
+	info.bVisible = FALSE;//hide cursor
 	SetConsoleCursorInfo(consoleHandle, &info);
 }
 
 void window()
 {
-	window1(440, 800, 300, 200);
+	window1(440, 800, 300, 200);//set window size
 }
 
-unsigned long color(string name)
+unsigned long color(string name)//return color from it's string
 {
 	if (name == "red")
 		return RGB(250, 0, 0);
@@ -57,19 +57,19 @@ unsigned long color(string name)
 		return RGB(100, 250, 100);
 }
 
-int fun(float x1, float x2, float y1, float y2, float x)
+int fun(float x1, float x2, float y1, float y2, float x)//calculate geometric function of line
 {
 	return round(y1 + ((y2-y1)/(x2-x1)*(x-x1)));
 }
 
 void line(int x1, int y1, int x2, int y2, int masshtab, string colour)
 {
-	y1 = 400 - masshtab * y1-20;
+	y1 = 400 - masshtab * y1-20;//we get start and end points of line, based on a scale
 	y2 = 400 - masshtab * y2-20;
 	x1 = masshtab * x1;
 	x2 = masshtab * x2;
 	HDC hdc = GetDC(GetConsoleWindow());
-	for (int i = x1; i < x2; ++i)
+	for (int i = x1; i < x2; ++i)//draw each ixel thats on line
 	{
 		int f = fun(x1, x2, y1, y2, i);
 		SetPixel(hdc, i, f, color(colour));
@@ -77,7 +77,7 @@ void line(int x1, int y1, int x2, int y2, int masshtab, string colour)
 	}
 }
 
-void plot(int height, int width, int *x, int *y, string colour)
+void plot(int height, int width, int *x, int *y, string colour)//to draw solid plot give function array of points
 {
 	line(-10, -10, 100, 0, 10, "cyan");
 	int masshtab = 400/height;
@@ -86,7 +86,7 @@ void plot(int height, int width, int *x, int *y, string colour)
 }
 
 
-void main()
+void main()//example to use that all
 {
 	int i;
 	int x[5] = { 1, 5, 10, 15, 20 };
