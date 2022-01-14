@@ -1,10 +1,11 @@
 # Simplest-cpp-plot
 Simplest method to build line plot (or other graphics, by modifiing basic functions) in console.
 
+Setting window size:
 ```c++
 	window();
 ```
-Setting window size
+Write points to console:
 ```c++
 	for (int j = 12; j > 1; j--)
 	{
@@ -18,7 +19,7 @@ Setting window size
 		print j;
 	}
 ```
-Write points to console
+Draw lines:
 ```c++
 	plot(12, 20, x, y1, "pink");
 
@@ -28,5 +29,5 @@ Write points to console
 
 	plot(12, 20, x, y4, "orange");
 ```
-Draw lines
+Result:
 ![result](result.png)
